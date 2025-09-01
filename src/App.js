@@ -47,6 +47,7 @@ function App() {
       const dateStr = date.toISOString().split('T')[0];
       
       const usersOnDate = users.filter(user => {
+        if (!user.createdAt) return false;
         const userDate = new Date(user.createdAt).toISOString().split('T')[0];
         return userDate === dateStr;
       }).length;
@@ -62,25 +63,25 @@ function App() {
 
   const getRecentUsers = () => {
     return users
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .sort((a, b) => new Date(b.createdAt || Date.now()) - new Date(a.createdAt || Date.now()))
       .slice(0, 5);
   };
 
   const getFilteredAndSortedUsers = () => {
     let filtered = users.filter(user =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+      (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (user.email && user.email.toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
     filtered.sort((a, b) => {
       let aValue, bValue;
       
       if (sortField === 'name') {
-        aValue = a.name.toLowerCase();
-        bValue = b.name.toLowerCase();
+        aValue = (a.name || '').toLowerCase();
+        bValue = (b.name || '').toLowerCase();
       } else {
-        aValue = new Date(a.createdAt);
-        bValue = new Date(b.createdAt);
+        aValue = new Date(a.createdAt || Date.now());
+        bValue = new Date(b.createdAt || Date.now());
       }
 
       if (sortDirection === 'asc') {
@@ -208,13 +209,13 @@ function App() {
                 <div key={user.id} className="user-card">
                   <img
                     src={user.avatar || 'https://via.placeholder.com/50'}
-                    alt={user.name}
+                    alt={user.name || 'User'}
                     className="user-avatar"
                   />
                   <div className="user-info">
-                    <div className="user-name">{user.name}</div>
+                    <div className="user-name">{user.name || 'Unknown User'}</div>
                     <div className="user-date">
-                      {new Date(user.createdAt).toLocaleDateString()}
+                      {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
                     </div>
                   </div>
                 </div>
@@ -255,13 +256,13 @@ function App() {
                   <td>
                     <img
                       src={user.avatar || 'https://via.placeholder.com/40'}
-                      alt={user.name}
+                      alt={user.name || 'User'}
                       className="table-avatar"
                     />
                   </td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                  <td>{user.name || 'N/A'}</td>
+                  <td>{user.email || 'N/A'}</td>
+                  <td>{user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}</td>
                 </tr>
               ))}
             </tbody>
@@ -299,13 +300,13 @@ function App() {
             <div className="modal-content">
               <img
                 src={selectedUser.avatar || 'https://via.placeholder.com/100'}
-                alt={selectedUser.name}
+                alt={selectedUser.name || 'User'}
                 className="modal-avatar"
               />
               <div className="user-details">
-                <p><strong>Name:</strong> {selectedUser.name}</p>
-                <p><strong>Email:</strong> {selectedUser.email}</p>
-                <p><strong>Created:</strong> {new Date(selectedUser.createdAt).toLocaleString()}</p>
+                <p><strong>Name:</strong> {selectedUser.name || 'N/A'}</p>
+                <p><strong>Email:</strong> {selectedUser.email || 'N/A'}</p>
+                <p><strong>Created:</strong> {selectedUser.createdAt ? new Date(selectedUser.createdAt).toLocaleString() : 'N/A'}</p>
                 {selectedUser.avatar && <p><strong>Has Avatar:</strong> Yes</p>}
               </div>
             </div>
