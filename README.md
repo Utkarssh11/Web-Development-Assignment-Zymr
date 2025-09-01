@@ -1,58 +1,50 @@
 # User Dashboard
 
-React based user dashboard for analytics and user management.
+A React-based user dashboard for analytics and user management.
 
-## Live Demo
-[Open on Vercel](https://web-development-assignment-zymr.vercel.app/)
+## Live Demo  
+[View on Vercel](https://web-development-assignment-zymr.vercel.app/)
 
 ## Features
 
 ### Dashboard
-- Shows total users count
-- Line chart of users created per day (last 30 days)
-- Pie chart of users with vs without avatar
-- List of 5 recently joined users
+- Total users count  
+- Line chart of users created per day (last 30 days)  
+- Pie chart (users with avatar vs without avatar)  
+- 5 most recently joined users  
 
 ### Users
-- Table with avatar, name, email, and created date
-- Search by name or email
-- Sorting by name and by date
-- Pagination (10 per page)
-- Modal with full user details
+- Table with avatar, name, email, and created date  
+- Search by name or email  
+- Sorting by name and by date  
+- Pagination (10 per page)  
+- Click on a row to see full user details in a modal  
 
-
-
-  
-## API Endpoint
-As per the assessment, I used the given API:  
-https://6874ce63dd06792b9c954fc7.mockapi.io/api/v1/users
-
-
-
+## API Endpoint  
+As per the assessment, I used the provided API:  
+[https://6874ce63dd06792b9c954fc7.mockapi.io/api/v1/users](https://6874ce63dd06792b9c954fc7.mockapi.io/api/v1/users)
 
 ## Technologies Used
-
-- **React 18** - Frontend framework
-- **React Hooks** - useState, useEffect for state management
-- **Recharts** - Chart library for data visualization
-- **CSS3** - Custom styling with responsive design
-
-
+- React 18 (with hooks: useState, useEffect)  
+- Recharts (for charts)  
+- CSS3 (for styling)  
 
 ## Project Structure
-
 ```
+
 src/
-├── App.js          # Main application component
-├── App.css         # Application styles
-├── index.js        # React entry point
-└── index.css       # Global styles
+├── App.js
+├── App.css
+├── index.js
+└── index.css
 
 public/
-└── index.html      # HTML template
+└── index.html
+
 ```
 
 
 ---
 
-Thank you Zymr for this opportunity.
+Thank you **Zymr** for this opportunity.
+
